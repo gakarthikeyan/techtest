@@ -2,4 +2,9 @@
 
     <string name="sample_title">Sample Title</string>
     <string name="banner_image">banner image</string>
+    <string name="calories">Calories: </string>
+    <string name="carbo">Carbohydrate: </string>
+    <string name="choles">Cholesterol: </string>
+    <string name="fat">Fat, Total: </string>
+    <string name="species">Species</string>
 </resources>

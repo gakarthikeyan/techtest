@@ -21,29 +21,25 @@ class HomeListAdapter (private val context: FragmentActivity, private val fishLi
             LayoutInflater.from(parent.context).inflate(R.layout.fishes_custom_layout, parent, false)
         )
     }
-
+// bind data into UI
     override fun onBindViewHolder(holder: HomeListViewHolder, position: Int) {
         try {
             val images = fishList.get(position).speciesIllustrationPhoto
             val title = fishList.get(position).speciesName
+            val fishName = fishList.get(position).path.replace("/profiles/", "")
             if(images!==null){
-                //            load fish image 1
-                /*GlideApp.with(context)
-                    .load(images.get(0).src)
-                    .into(holder.fishImage1)*/
-                //            load fish image 2
-               /* GlideApp.with(context)
-                    .load(images.get(1).src)
-                    .into(holder.fishImage2)*/
-
-                //            load fish image 3
+                //            load fish image
                 GlideApp.with(context)
                     .load(images.src)
-                    .into(holder.fishImage3)
+                    .into(holder.fishImage)
             }
 
 
             holder.fishTitle.text = title
+
+            holder.fishImage.setOnClickListener{
+                mItemClickListener.fishItemClicked(fishName, images.src)
+            }
 
         }catch (e: Exception){
             if(BuildConfig.DEBUG){
@@ -57,19 +53,18 @@ class HomeListAdapter (private val context: FragmentActivity, private val fishLi
     override fun getItemCount(): Int {
         return fishList.size
     }
-
+//prepare view holder to bind data into UI
     class HomeListViewHolder(view: View) : RecyclerView.ViewHolder(view) {
-        val fishImage1 = view.findViewById<ImageView>(R.id.image1)
-        val fishImage2 = view.findViewById<ImageView>(R.id.image2)
-        val fishImage3 = view.findViewById<ImageView>(R.id.image3)
+        val fishImage = view.findViewById<ImageView>(R.id.image)
         val fishTitle = view.findViewById<TextView>(R.id.tv_fish_name)
     }
 
+//    pass click listener instance from the client page
     fun setCastCrewItemClickListener(listener: FishItemClickListener) {
         mItemClickListener = listener
     }
-
+// interface to monitor item clicked state
     interface FishItemClickListener{
-        fun fishItemClicked(position: Int)
+        fun fishItemClicked(fishName: String, image: String)
     }
 }

@@ -15,5 +15,10 @@
     <fragment
         android:id="@+id/detailFragment"
         android:name="com.example.techtest.ui.fragments.DetailFragment"
-        android:label="DetailFragment" />
+        android:label="DetailFragment" >
+        <argument android:name="fish_name"
+            app:argType="string"/>
+        <argument android:name="image_path"
+            app:argType="string"/>
+    </fragment>
 </navigation>

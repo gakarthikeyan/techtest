@@ -18,6 +18,7 @@ import javax.inject.Singleton
 @InstallIn(SingletonComponent::class)
 object AppModule {
 
+//    config di for Retrofit instance
     @Singleton
     @Provides
     fun getRetrofitInstance(): Retrofit{
@@ -27,13 +28,13 @@ object AppModule {
             .addConverterFactory(GsonConverterFactory.create())
             .build()
     }
-
+// config di for API Service instance
     @Singleton
     @Provides
     fun getApiServiceInstance(retrofit: Retrofit): ApiService{
         return retrofit.create(ApiService::class.java)
     }
-
+    //    config interceptor for logging purpose (only applicable in debug mode)
     private fun loggingInterceptor(): Interceptor{
         val interceptor = HttpLoggingInterceptor()
         if (BuildConfig.DEBUG) {
@@ -45,6 +46,7 @@ object AppModule {
         return  interceptor
     }
 
+//    config HTTP Clint to add various interceptor ( as per our need, here I am using only for logging)
     private val client = OkHttpClient.Builder().addInterceptor(Interceptor { chain ->
         val original = chain.request()
         val request = original.newBuilder().method(original.method, original.body)

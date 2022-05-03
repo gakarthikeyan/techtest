@@ -11,6 +11,7 @@ import javax.inject.Inject
 class HomeRepository @Inject constructor(private val apiInstance: ApiService) {
     private var job: CompletableJob? = null
 
+//    do coroutine job for fetch all fish items from the server
     fun getMasterData(): LiveData<Fishes> {
         job = Job()
         return object : LiveData<Fishes>(){

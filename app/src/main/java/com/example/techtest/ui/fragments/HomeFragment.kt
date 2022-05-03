@@ -1,6 +1,5 @@
 package com.example.techtest.ui.fragments
 
-import android.opengl.Visibility
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -23,7 +22,7 @@ import com.example.techtest.viewmodel.home.HomeViewModel
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
-class HomeFragment : Fragment() {
+class HomeFragment : Fragment(), HomeListAdapter.FishItemClickListener {
     lateinit var navController: NavController
     private var mView: View? = null
     lateinit var homeBinding: HomeFragmentLayoutBinding
@@ -65,31 +64,52 @@ class HomeFragment : Fragment() {
         viewModel = ViewModelProvider(this)[HomeViewModel::class.java]
         navController = findNavController()
         homeBinding.toolbar.backIcon.visibility = GONE
-        homeBinding.toolbar.title.text = "Species"
+        homeBinding.toolbar.title.text = getString(R.string.species)
 
     }
 
+//    add listener for request and response of api call
     private fun addListeners(){
-        Constants.showProgressDialog(activity)
-        viewModel.getAllFishes().observe(viewLifecycleOwner){ allFishes ->
-            Constants.cancelProgressDialog()
+    //    check network connectivity to request api call
+        if(Constants.isNetworkAvailable(requireContext())){
+            Constants.showProgressDialog(activity)
+            viewModel.getAllFishes().observe(viewLifecycleOwner){ allFishes ->
+                Constants.cancelProgressDialog()
 
-            if(allFishes != null){
-                fishesList.clear()
-                fishesList = allFishes
-                loadFishes()
+                if(allFishes != null){
+                    fishesList.clear()
+                    fishesList = allFishes
+                    loadFishes()
 
-            }else{
-                Toast.makeText(activity, "Data not available.", Toast.LENGTH_SHORT).show()
+                }else{
+                    Toast.makeText(activity, "Data not available.", Toast.LENGTH_SHORT).show()
+                }
+
             }
-
+        }else{
+            Toast.makeText(activity, "Internet Not Available", Toast.LENGTH_SHORT).show()
         }
-    }
 
+
+    }
+// prepare and setup adapter for fish list
     private fun loadFishes(){
         homeAdapter = HomeListAdapter(requireActivity(), fishesList)
         linearLayoutManager = LinearLayoutManager(activity)
         homeBinding.fishRecyclerView.layoutManager = linearLayoutManager
         homeBinding.fishRecyclerView.adapter = homeAdapter
+        homeAdapter.setCastCrewItemClickListener(this)
+    }
+
+//    capture item clicked state and pass data to details page
+    override fun fishItemClicked(fishName: String, image: String) {
+        val action = HomeFragmentDirections.actionHomeFragmentToDetailFragment(fishName, image)
+        navController.navigate(action)
+
+    }
+// cancel coroutine job if there is any running task
+    override fun onDetach() {
+        viewModel.cancelJob()
+        super.onDetach()
     }
 }

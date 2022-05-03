@@ -9,6 +9,7 @@ import javax.inject.Inject
 class DetailsRepository @Inject constructor(private val apiInstance: ApiService) {
     private var job: CompletableJob? = null
 
+//    do coroutine job for fetch single fish details from the server
     fun getFishDetails(fishName: String): MutableLiveData<Fishes> {
         job = Job()
         return object : MutableLiveData<Fishes>(){

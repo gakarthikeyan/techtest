@@ -35,6 +35,8 @@ android {
 
     flavorDimensions "flavor"
 
+//    config build variants to test app in different environments (Development, Quality Control
+//    , User Acceptance Testing & Pre Production)
     productFlavors {
 
         production {

@@ -10,10 +10,12 @@ import javax.inject.Inject
 @HiltViewModel
 class HomeViewModel @Inject constructor(private val repository: HomeRepository): ViewModel() {
 
+    //    get all fish items from server through the repository
     fun getAllFishes(): LiveData<Fishes>{
         return repository.getMasterData()
     }
 
+    //    cancel coroutine job
     fun cancelJob(){
         repository.cancelJobs()
     }

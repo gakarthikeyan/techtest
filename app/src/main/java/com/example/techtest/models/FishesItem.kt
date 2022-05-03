@@ -2,175 +2,116 @@ package com.example.techtest.models
 
 
 import com.google.gson.annotations.SerializedName
-import com.google.gson.annotations.Expose
 
 data class FishesItem(
     @SerializedName("Animal Health")
-    @Expose
-    val animalHealth: String?,
+    val animalHealth: String? = null,
     @SerializedName("Availability")
-    @Expose
-    val availability: String?,
+    val availability: String = "",
     @SerializedName("Biology")
-    @Expose
-    val biology: String?,
+    val biology: String = "",
     @SerializedName("Bycatch")
-    @Expose
-    val bycatch: String?,
+    val bycatch: String? = null,
     @SerializedName("Calories")
-    @Expose
-    val calories: String?,
+    val calories: String = "",
     @SerializedName("Carbohydrate")
-    @Expose
-    val carbohydrate: String?,
+    val carbohydrate: String = "",
     @SerializedName("Cholesterol")
-    @Expose
-    val cholesterol: String?,
+    val cholesterol: String? = null,
     @SerializedName("Color")
-    @Expose
-    val color: String?,
+    val color: String? = null,
     @SerializedName("Disease Treatment and Prevention")
-    @Expose
-    val diseaseTreatmentAndPrevention: Any?,
+    val diseaseTreatmentAndPrevention: Any? = null,
     @SerializedName("Diseases in Salmon")
-    @Expose
-    val diseasesInSalmon: String?,
+    val diseasesInSalmon: String? = null,
     @SerializedName("Displayed Seafood Profile Illustration")
-    @Expose
-    val displayedSeafoodProfileIllustration: Any?,
+    val displayedSeafoodProfileIllustration: Any? = null,
     @SerializedName("Ecosystem Services")
-    @Expose
-    val ecosystemServices: String?,
+    val ecosystemServices: String? = null,
     @SerializedName("Environmental Considerations")
-    @Expose
-    val environmentalConsiderations: String?,
+    val environmentalConsiderations: String? = null,
     @SerializedName("Environmental Effects")
-    @Expose
-    val environmentalEffects: String?,
+    val environmentalEffects: String? = null,
     @SerializedName("Farming Methods")
-    @Expose
-    val farmingMethods: String?,
+    val farmingMethods: String? = null,
     @SerializedName("Farming Methods_")
-    @Expose
-    val farmingMethod: String?,
+    val farmingMethod: String? = null,
     @SerializedName("Fat, Total")
-    @Expose
-    val fatTotal: String?,
+    val fatTotal: String = "",
     @SerializedName("Feeds_")
-    @Expose
-    val feeds: String?,
+    val feeds: String? = null,
     @SerializedName("Feeds")
-    @Expose
-    val feed: String?,
+    val feed: String? = null,
     @SerializedName("Fiber, Total Dietary")
-    @Expose
-    val fiberTotalDietary: String?,
+    val fiberTotalDietary: String = "",
     @SerializedName("Fishery Management")
-    @Expose
-    val fisheryManagement: String?,
+    val fisheryManagement: String? = null,
     @SerializedName("Fishing Rate")
-    @Expose
-    val fishingRate: String?,
+    val fishingRate: String? = null,
     @SerializedName("Habitat")
-    @Expose
-    val habitat: String?,
+    val habitat: String? = null,
     @SerializedName("Habitat Impacts")
-    @Expose
-    val habitatImpacts: String?,
+    val habitatImpacts: String? = null,
     @SerializedName("Harvest")
-    @Expose
-    val harvest: String?,
+    val harvest: String? = null,
     @SerializedName("Harvest Type")
-    @Expose
-    val harvestType: String?,
+    val harvestType: String = "",
     @SerializedName("Health Benefits")
-    @Expose
-    val healthBenefits: String?,
+    val healthBenefits: String? = null,
     @SerializedName("Human_Health_")
-    @Expose
-    val humanHealth: String?,
+    val humanHealth: String? = null,
     @SerializedName("Human Health")
-    @Expose
-    val humanHealthImage: String?,
-    @SerializedName("Image Gallery")
-    @Expose
-    val imageGallery: List<ImageGallery>?,
+    val humanHealths: String? = null,
     @SerializedName("last_update")
-    @Expose
-    val lastUpdate: String?,
+    val lastUpdate: String = "",
     @SerializedName("Location")
-    @Expose
-    val location: String?,
+    val location: String? = null,
     @SerializedName("Management")
-    @Expose
-    val management: String?,
+    val management: String? = null,
     @SerializedName("NOAA Fisheries Region")
-    @Expose
-    val nOAAFisheriesRegion: String?,
+    val nOAAFisheriesRegion: String = "",
     @SerializedName("Path")
-    @Expose
-    val path: String?,
+    val path: String = "",
     @SerializedName("Physical Description")
-    @Expose
-    val physicalDescription: String?,
+    val physicalDescription: String = "",
     @SerializedName("Population")
-    @Expose
-    val population: String?,
+    val population: String? = null,
     @SerializedName("Population Status")
-    @Expose
-    val populationStatus: String?,
+    val populationStatus: String? = null,
     @SerializedName("Production")
-    @Expose
-    val production: String?,
+    val production: String? = null,
     @SerializedName("Protein")
-    @Expose
-    val protein: String?,
+    val protein: String = "",
     @SerializedName("Quote")
-    @Expose
-    val quote: String?,
+    val quote: String = "",
     @SerializedName("Quote Background Color")
-    @Expose
-    val quoteBackgroundColor: String?,
+    val quoteBackgroundColor: String = "",
     @SerializedName("Research")
-    @Expose
-    val research: String?,
+    val research: String? = null,
     @SerializedName("Saturated Fatty Acids, Total")
-    @Expose
-    val saturatedFattyAcidsTotal: String?,
+    val saturatedFattyAcidsTotal: String = "",
     @SerializedName("Scientific Name")
-    @Expose
-    val scientificName: String?,
+    val scientificName: String = "",
     @SerializedName("Selenium")
-    @Expose
-    val selenium: String?,
+    val selenium: String? = null,
     @SerializedName("Serving Weight")
-    @Expose
-    val servingWeight: String?,
+    val servingWeight: String = "",
     @SerializedName("Servings")
-    @Expose
-    val servings: String?,
+    val servings: String = "",
     @SerializedName("Sodium")
-    @Expose
-    val sodium: String?,
+    val sodium: String = "",
     @SerializedName("Source")
-    @Expose
-    val source: String?,
+    val source: String = "",
     @SerializedName("Species Aliases")
-    @Expose
-    val speciesAliases: String?,
+    val speciesAliases: String = "",
     @SerializedName("Species Illustration Photo")
-    @Expose
-    val speciesIllustrationPhoto: SpeciesIllustrationPhoto?,
+    val speciesIllustrationPhoto: SpeciesIllustrationPhoto = SpeciesIllustrationPhoto(),
     @SerializedName("Species Name")
-    @Expose
-    val speciesName: String?,
+    val speciesName: String = "",
     @SerializedName("Sugars, Total")
-    @Expose
-    val sugarsTotal: String?,
+    val sugarsTotal: String = "",
     @SerializedName("Taste")
-    @Expose
-    val taste: String?,
+    val taste: String? = null,
     @SerializedName("Texture")
-    @Expose
-    val texture: String?
+    val texture: String? = null
 )

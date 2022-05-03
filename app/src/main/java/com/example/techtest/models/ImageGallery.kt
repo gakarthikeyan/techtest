@@ -2,16 +2,12 @@ package com.example.techtest.models
 
 
 import com.google.gson.annotations.SerializedName
-import com.google.gson.annotations.Expose
 
 data class ImageGallery(
     @SerializedName("alt")
-    @Expose
-    val alt: String?,
+    val alt: String = "",
     @SerializedName("src")
-    @Expose
-    val src: String?,
+    val src: String = "",
     @SerializedName("title")
-    @Expose
-    val title: String?
+    val title: String = ""
 )

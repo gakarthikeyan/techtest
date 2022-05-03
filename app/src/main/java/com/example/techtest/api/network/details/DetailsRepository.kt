@@ -1,6 +1,5 @@
 package com.example.techtest.api.network.details
 
-import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import com.example.techtest.api.ApiService
 import com.example.techtest.models.Fishes

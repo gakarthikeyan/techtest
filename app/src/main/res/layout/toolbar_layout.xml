@@ -5,12 +5,14 @@
         android:layout_height="wrap_content"
         android:layout_width="match_parent"
         android:orientation="horizontal"
-        android:padding="20dp">
+        android:background="@color/color_navigation_bar"
+        android:padding="10dp">
         <ImageView
             android:id="@+id/backIcon"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:src="@drawable/ic_back"
+            android:layout_gravity="center_vertical"
             android:layout_marginEnd="15dp"
             android:visibility="visible"
              />
@@ -21,6 +23,7 @@
             android:layout_gravity="center_vertical"
             android:textColor="@color/white"
             android:textStyle="bold"
+            android:textSize="20sp"
             android:text="@string/sample_title"/>
     </LinearLayout>
 </layout>

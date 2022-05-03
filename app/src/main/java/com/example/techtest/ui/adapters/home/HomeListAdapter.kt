@@ -9,7 +9,6 @@ import androidx.fragment.app.FragmentActivity
 import androidx.recyclerview.widget.RecyclerView
 import com.example.techtest.BuildConfig
 import com.example.techtest.R
-import com.example.techtest.models.Fishes
 import com.example.techtest.models.FishesItem
 import com.example.techtest.utility.GlideApp
 
@@ -25,24 +24,24 @@ class HomeListAdapter (private val context: FragmentActivity, private val fishLi
 
     override fun onBindViewHolder(holder: HomeListViewHolder, position: Int) {
         try {
-            val images = fishList.get(position).imageGallery
+            val images = fishList.get(position).speciesIllustrationPhoto
             val title = fishList.get(position).speciesName
-//            load fish image 1
-            GlideApp.with(context)
-                .load(images?.get(0)?.src)
-                .circleCrop()
-                .into(holder.fishImage1)
-            //            load fish image 2
-            GlideApp.with(context)
-                .load(images?.get(1)?.src)
-                .circleCrop()
-                .into(holder.fishImage2)
+            if(images!==null){
+                //            load fish image 1
+                /*GlideApp.with(context)
+                    .load(images.get(0).src)
+                    .into(holder.fishImage1)*/
+                //            load fish image 2
+               /* GlideApp.with(context)
+                    .load(images.get(1).src)
+                    .into(holder.fishImage2)*/
 
-            //            load fish image 3
-            GlideApp.with(context)
-                .load(images?.get(2)?.src)
-                .circleCrop()
-                .into(holder.fishImage3)
+                //            load fish image 3
+                GlideApp.with(context)
+                    .load(images.src)
+                    .into(holder.fishImage3)
+            }
+
 
             holder.fishTitle.text = title
 

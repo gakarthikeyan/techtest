@@ -1,6 +1,8 @@
 package com.example.data.network.di
 
 import com.example.data.network.ApiService
+import com.example.data.repository.GetFishItemRepositoryImpl
+import com.example.domain.repository.GetFishItemRepository
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -54,4 +56,10 @@ object DataModule {
     })
         .addInterceptor(loggingInterceptor())
         .build()
+
+
+    @Provides
+    fun getFishItemRepository(apiService: ApiService): GetFishItemRepository{
+        return GetFishItemRepositoryImpl(apiService)
+    }
 }

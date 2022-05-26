@@ -13,9 +13,9 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.NavController
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.example.domain.model.FishesItem
 import com.example.techtest.R
 import com.example.techtest.databinding.HomeFragmentLayoutBinding
-import com.example.techtest.models.FishesItem
 import com.example.techtest.ui.adapters.home.HomeListAdapter
 import com.example.techtest.utility.Constants
 import com.example.techtest.viewmodel.home.HomeViewModel
@@ -26,7 +26,6 @@ class HomeFragment : Fragment(), HomeListAdapter.FishItemClickListener {
     lateinit var navController: NavController
     private var mView: View? = null
     lateinit var homeBinding: HomeFragmentLayoutBinding
-    var fishesList: ArrayList<FishesItem> = arrayListOf()
     lateinit var homeAdapter: HomeListAdapter
     private lateinit var linearLayoutManager: LinearLayoutManager
     lateinit var viewModel: HomeViewModel
@@ -70,22 +69,26 @@ class HomeFragment : Fragment(), HomeListAdapter.FishItemClickListener {
 
 //    add listener for request and response of api call
     private fun addListeners(){
+
     //    check network connectivity to request api call
         if(Constants.isNetworkAvailable(requireContext())){
-            Constants.showProgressDialog(activity)
-            viewModel.getAllFishes().observe(viewLifecycleOwner){ allFishes ->
-                Constants.cancelProgressDialog()
-
-                if(allFishes != null){
-                    fishesList.clear()
-                    fishesList = allFishes
-                    loadFishes()
-
-                }else{
-                    Toast.makeText(activity, "Data not available.", Toast.LENGTH_SHORT).show()
+            viewModel.fishItem.observe(viewLifecycleOwner){ state ->
+                if(state?.isLoading == true){
+                    Constants.showProgressDialog(activity)
                 }
 
+                if(state?.error?.isNotBlank() == true){
+                    Constants.cancelProgressDialog()
+                    Toast.makeText(activity, state.error, Toast.LENGTH_SHORT).show()
+                }
+
+                state?.data?.let { data ->
+                    Constants.cancelProgressDialog()
+                    loadFishes(data)
+
+                }
             }
+
         }else{
             Toast.makeText(activity, "Internet Not Available", Toast.LENGTH_SHORT).show()
         }
@@ -93,8 +96,8 @@ class HomeFragment : Fragment(), HomeListAdapter.FishItemClickListener {
 
     }
 // prepare and setup adapter for fish list
-    private fun loadFishes(){
-        homeAdapter = HomeListAdapter(requireActivity(), fishesList)
+    private fun loadFishes(fishList: List<FishesItem>){
+        homeAdapter = HomeListAdapter(requireActivity(), fishList)
         linearLayoutManager = LinearLayoutManager(activity)
         homeBinding.fishRecyclerView.layoutManager = linearLayoutManager
         homeBinding.fishRecyclerView.adapter = homeAdapter
@@ -106,10 +109,5 @@ class HomeFragment : Fragment(), HomeListAdapter.FishItemClickListener {
         val action = HomeFragmentDirections.actionHomeFragmentToDetailFragment(fishName, image)
         navController.navigate(action)
 
-    }
-// cancel coroutine job if there is any running task
-    override fun onDetach() {
-        viewModel.cancelJob()
-        super.onDetach()
     }
 }

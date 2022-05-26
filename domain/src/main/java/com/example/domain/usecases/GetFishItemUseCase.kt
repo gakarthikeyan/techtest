@@ -9,12 +9,12 @@ import javax.inject.Inject
 
 class GetFishItemUseCase @Inject constructor(private val getFishItemRepository: GetFishItemRepository){
 
-    suspend operator fun invoke(): Flow<Resource<List<FishesItem>>> = flow {
+    operator fun invoke(): Flow<Resource<List<FishesItem>>> = flow {
         emit(Resource.Loading(null))
         try{
 
             val response = getFishItemRepository.getFishes()
-            emit(Resource.Success(response))
+            emit(Resource.Success(data = response))
 
         }catch (e: Exception){
             emit(Resource.Error("Error Occurred"))

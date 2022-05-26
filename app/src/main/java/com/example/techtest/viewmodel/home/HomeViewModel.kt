@@ -1,22 +1,40 @@
 package com.example.techtest.viewmodel.home
 
 import androidx.lifecycle.LiveData
+import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import com.example.techtest.api.network.home.HomeRepository
-import com.example.techtest.models.Fishes
+import androidx.lifecycle.viewModelScope
+import com.example.common.Resource
+import com.example.domain.usecases.GetFishItemUseCase
 import dagger.hilt.android.lifecycle.HiltViewModel
+import kotlinx.coroutines.flow.launchIn
+import kotlinx.coroutines.flow.onEach
 import javax.inject.Inject
 
 @HiltViewModel
-class HomeViewModel @Inject constructor(private val repository: HomeRepository): ViewModel() {
+class HomeViewModel @Inject constructor(private val getFishItemUseCase: GetFishItemUseCase): ViewModel(){
 
-    //    get all fish items from server through the repository
-    fun getAllFishes(): LiveData<Fishes>{
-        return repository.getMasterData()
+    private  val _fishItem = MutableLiveData(HomeState())
+    val fishItem : LiveData<HomeState> get() = _fishItem
+
+    init {
+        getFishItems()
     }
 
-    //    cancel coroutine job
-    fun cancelJob(){
-        repository.cancelJobs()
+
+    private fun getFishItems(){
+        getFishItemUseCase().onEach {
+            when(it){
+                is Resource.Loading->{
+                    _fishItem.value = HomeState(isLoading = true)
+                }
+                is Resource.Success->{
+                    _fishItem.value = HomeState(data =  it.data)
+                }
+                is Resource.Error->{
+                    _fishItem.value = HomeState(error =  it.message.toString())
+                }
+            }
+        }.launchIn(viewModelScope)
     }
 }

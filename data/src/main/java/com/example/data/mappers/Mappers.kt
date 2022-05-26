@@ -5,7 +5,7 @@ import com.example.data.network.model.SpeciesIllustrationPhotoDTO
 import com.example.domain.model.FishesItem
 import com.example.domain.model.SpeciesIllustrationPhoto
 
-fun List<FishesItemDTO>.toDomain():List<FishesItem>{
+fun List<FishesItemDTO>.toDomain(): List<FishesItem>{
 
     return map{
         FishesItem(

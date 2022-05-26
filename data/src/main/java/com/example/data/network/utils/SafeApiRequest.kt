@@ -1,6 +1,7 @@
 package com.example.data.network.utils
 
 import android.util.Log
+import org.json.JSONException
 import org.json.JSONObject
 import retrofit2.Response
 
@@ -17,14 +18,14 @@ abstract class SafeApiRequest {
                 try {
                     message.append(JSONObject(it).getString("error"))
 
-                }catch (e: Exception){
+                }catch (e: JSONException){
                     e.printStackTrace()
                 }
 
-                Log.d("API Request", "Response -> ${message}")
-
-                throw ApiException(message.toString())
             }
+            Log.d("API Request", "Response -> ${message}")
+
+            throw ApiException(message.toString())
 
         }
     }

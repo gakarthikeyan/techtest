@@ -7,14 +7,14 @@ import android.widget.ImageView
 import android.widget.TextView
 import androidx.fragment.app.FragmentActivity
 import androidx.recyclerview.widget.RecyclerView
+import com.example.domain.model.FishesItem
 import com.example.techtest.BuildConfig
 import com.example.techtest.R
-import com.example.techtest.models.FishesItem
 import com.example.techtest.utility.GlideApp
 
 class HomeListAdapter (private val context: FragmentActivity, private val fishList: List<FishesItem>): RecyclerView.Adapter<HomeListAdapter.HomeListViewHolder>() {
 
-    lateinit var mItemClickListener : FishItemClickListener
+    private lateinit var mItemClickListener : FishItemClickListener
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): HomeListViewHolder {
         return HomeListViewHolder(
@@ -24,15 +24,12 @@ class HomeListAdapter (private val context: FragmentActivity, private val fishLi
 // bind data into UI
     override fun onBindViewHolder(holder: HomeListViewHolder, position: Int) {
         try {
-            val images = fishList.get(position).speciesIllustrationPhoto
-            val title = fishList.get(position).speciesName
-            val fishName = fishList.get(position).path.replace("/profiles/", "")
-            if(images!==null){
-                //            load fish image
-                GlideApp.with(context)
-                    .load(images.src)
-                    .into(holder.fishImage)
-            }
+            val images = fishList[position].speciesIllustrationPhoto
+            val title = fishList[position].speciesName
+            val fishName = fishList[position].path.replace("/profiles/", "")
+            GlideApp.with(context)
+                .load(images.src)
+                .into(holder.fishImage)
 
 
             holder.fishTitle.text = title
@@ -55,8 +52,8 @@ class HomeListAdapter (private val context: FragmentActivity, private val fishLi
     }
 //prepare view holder to bind data into UI
     class HomeListViewHolder(view: View) : RecyclerView.ViewHolder(view) {
-        val fishImage = view.findViewById<ImageView>(R.id.image)
-        val fishTitle = view.findViewById<TextView>(R.id.tv_fish_name)
+        val fishImage: ImageView = view.findViewById(R.id.image)
+        val fishTitle: TextView = view.findViewById(R.id.tv_fish_name)
     }
 
 //    pass click listener instance from the client page

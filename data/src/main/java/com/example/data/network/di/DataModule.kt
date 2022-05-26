@@ -1,6 +1,6 @@
 package com.example.data.network.di
 
-import com.example.data.network.ApiService
+import com.example.data.network.ApiDataService
 import com.example.data.repository.GetFishItemRepositoryImpl
 import com.example.domain.repository.GetFishItemRepository
 import dagger.Module
@@ -24,7 +24,7 @@ object DataModule {
     @Provides
     fun getRetrofitInstance(): Retrofit {
         return Retrofit.Builder()
-            .baseUrl("")
+            .baseUrl("https://www.fishwatch.gov/api/")
             .client(client)
             .addConverterFactory(GsonConverterFactory.create())
             .build()
@@ -32,8 +32,8 @@ object DataModule {
     // config di for API Service instance
     @Singleton
     @Provides
-    fun getApiServiceInstance(retrofit: Retrofit): ApiService {
-        return retrofit.create(ApiService::class.java)
+    fun getApiServiceInstance(retrofit: Retrofit): ApiDataService {
+        return retrofit.create(ApiDataService::class.java)
     }
     //    config interceptor for logging purpose (only applicable in debug mode)
     private fun loggingInterceptor(): Interceptor {
@@ -59,7 +59,7 @@ object DataModule {
 
 
     @Provides
-    fun getFishItemRepository(apiService: ApiService): GetFishItemRepository{
+    fun getFishItemRepository(apiService: ApiDataService): GetFishItemRepository{
         return GetFishItemRepositoryImpl(apiService)
     }
 }

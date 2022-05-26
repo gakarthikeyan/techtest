@@ -1,23 +1,17 @@
 package com.example.techtest.ui.fragments
 
-import android.os.Build
 import android.os.Bundle
-import android.text.Html
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
-import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.NavController
 import androidx.navigation.fragment.findNavController
 import com.example.techtest.R
 import com.example.techtest.databinding.DetailFragmentLayoutBinding
-import com.example.techtest.models.FishesItem
 import com.example.techtest.utility.Constants
-import com.example.techtest.utility.GlideApp
-import com.example.techtest.viewmodel.details.DetailsViewModel
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -25,7 +19,7 @@ class DetailFragment : Fragment() {
     private lateinit var navController: NavController
     private var mView: View? = null
     private lateinit var detailBinding: DetailFragmentLayoutBinding
-    private lateinit var viewModel: DetailsViewModel
+//    private lateinit var viewModel: DetailsViewModel
     private var fishName : String = ""
     private var imagePath : String = ""
 
@@ -55,7 +49,7 @@ class DetailFragment : Fragment() {
 
 //    initialize view model and get argument for fish name and image path
     private fun init(){
-        viewModel = ViewModelProvider(this)[DetailsViewModel::class.java]
+//        viewModel = ViewModelProvider(this)[DetailsViewModel::class.java]
         navController = findNavController()
         fishName = arguments?.getString("fish_name").toString()
         imagePath = arguments?.getString("image_path").toString()
@@ -82,18 +76,18 @@ class DetailFragment : Fragment() {
 //    observe api response
     private fun requestFishDetails(){
         Constants.showProgressDialog(requireActivity())
-        viewModel.getFishDetails(fishName).observe(viewLifecycleOwner){ fishDetails ->
+        /*viewModel.getFishDetails(fishName).observe(viewLifecycleOwner){ fishDetails ->
             Constants.cancelProgressDialog()
 
             if(fishDetails!= null){
                 bindFishDetails(fishDetails)
             }
 
-        }
+        }*/
     }
 
 //    bind fish details into UI
-    private fun bindFishDetails(fishDetails: ArrayList<FishesItem>){
+    /*private fun bindFishDetails(fishDetails: ArrayList<FishesItem>){
 
         try{
             val fish = fishDetails.get(0)
@@ -120,10 +114,10 @@ class DetailFragment : Fragment() {
 
 
     }
-
+*/
     // cancel coroutine job if there is any running task
     override fun onDetach() {
-        viewModel.cancelJob()
+//        viewModel.cancelJob()
         super.onDetach()
     }
 

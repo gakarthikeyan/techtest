@@ -1,3 +1,8 @@
 package com.example.data.network.model.products
 
-class Products : ArrayList<ProductsDTO>()
+data class Products(
+    val limit: Int,
+    val products: List<Product>,
+    val skip: Int,
+    val total: Int
+)

@@ -1,4 +1,4 @@
-package com.example.domain.model.products
+package com.example.data.network.model.products
 
 data class Product(
     val brand: String,

@@ -13,7 +13,7 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.NavController
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.example.domain.model.products.Products
+import com.example.data.network.model.products.Products
 import com.example.techtest.R
 import com.example.techtest.databinding.HomeFragmentLayoutBinding
 import com.example.techtest.ui.adapters.home.HomeListAdapter

@@ -5,14 +5,14 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.common.Resource
-import com.example.data.usecases.GetFishItemUseCase
+import com.example.domain.usecases.GetProductsUseCase
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.launchIn
 import kotlinx.coroutines.flow.onEach
 import javax.inject.Inject
 
 @HiltViewModel
-class HomeViewModel @Inject constructor(private val getFishItemUseCase: GetFishItemUseCase): ViewModel(){
+class HomeViewModel @Inject constructor(private val getProductsUseCase: GetProductsUseCase): ViewModel(){
 
     private  val _fishItem = MutableLiveData(HomeState())
     val fishItem : LiveData<HomeState> get() = _fishItem
@@ -23,7 +23,7 @@ class HomeViewModel @Inject constructor(private val getFishItemUseCase: GetFishI
 
 
     private fun getFishItems(){
-        getFishItemUseCase().onEach {
+        getProductsUseCase().onEach {
             when(it){
                 is Resource.Loading->{
                     _fishItem.value = HomeState(isLoading = true)

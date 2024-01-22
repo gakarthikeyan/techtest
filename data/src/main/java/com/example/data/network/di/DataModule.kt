@@ -2,6 +2,7 @@ package com.example.data.network.di
 
 import com.example.data.network.ApiDataService
 import com.example.data.repository.GetFishItemRepositoryImpl
+import com.example.data.usecases.GetFishItemUseCase
 import com.example.domain.repository.GetFishItemRepository
 import dagger.Module
 import dagger.Provides
@@ -24,7 +25,8 @@ object DataModule {
     @Provides
     fun getRetrofitInstance(): Retrofit {
         return Retrofit.Builder()
-            .baseUrl("https://www.fishwatch.gov/api/")
+//            .baseUrl("https://www.fishwatch.gov/api/")
+            .baseUrl("https://dummyjson.com/")
             .client(client)
             .addConverterFactory(GsonConverterFactory.create())
             .build()
@@ -61,5 +63,10 @@ object DataModule {
     @Provides
     fun getFishItemRepository(apiService: ApiDataService): GetFishItemRepository{
         return GetFishItemRepositoryImpl(apiService)
+    }
+
+    @Provides
+    fun provideGetFishItemUseCase(getFishItemRepositoryImpl: GetFishItemRepositoryImpl): GetFishItemUseCase {
+        return GetFishItemUseCase(getFishItemRepositoryImpl)
     }
 }

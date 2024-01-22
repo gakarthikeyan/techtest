@@ -2,8 +2,12 @@ package com.example.data.mappers
 
 import com.example.data.network.model.FishesItemDTO
 import com.example.data.network.model.SpeciesIllustrationPhotoDTO
+import com.example.data.network.model.products.ProductDTO
+import com.example.data.network.model.products.ProductsDTO
 import com.example.domain.model.FishesItem
 import com.example.domain.model.SpeciesIllustrationPhoto
+import com.example.domain.model.products.Product
+import com.example.domain.model.products.Products
 
 fun List<FishesItemDTO>.toDomain(): List<FishesItem>{
 
@@ -38,4 +42,33 @@ fun SpeciesIllustrationPhotoDTO.toDomain(): SpeciesIllustrationPhoto {
     return SpeciesIllustrationPhoto(
         alt, src, title
     )
+}
+
+fun List<ProductDTO>.toProductDomain(): List<Product> {
+    return map {
+        Product(
+            brand = it.brand,
+            category = it.category,
+            description = it.description,
+            discountPercentage = it.discountPercentage,
+            id = it.id,
+            images = it.images,
+            price = it.price,
+            rating = it.rating,
+            stock = it.stock,
+            thumbnail = it.thumbnail,
+            title = it.title,
+        )
+    }
+}
+
+fun List<ProductsDTO>.toAllProductsDomain(): List<Products>{
+    return map {
+        Products(
+            limit = it.limit,
+            products = it.products.toProductDomain(),
+            skip = it.skip,
+            total = it.total
+        )
+    }
 }

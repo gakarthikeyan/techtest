@@ -7,12 +7,12 @@ import android.widget.ImageView
 import android.widget.TextView
 import androidx.fragment.app.FragmentActivity
 import androidx.recyclerview.widget.RecyclerView
-import com.example.domain.model.FishesItem
+import com.example.domain.model.products.Products
 import com.example.techtest.BuildConfig
 import com.example.techtest.R
 import com.example.techtest.utility.GlideApp
 
-class HomeListAdapter (private val context: FragmentActivity, private val fishList: List<FishesItem>): RecyclerView.Adapter<HomeListAdapter.HomeListViewHolder>() {
+class HomeListAdapter (private val context: FragmentActivity, private val fishList: Products): RecyclerView.Adapter<HomeListAdapter.HomeListViewHolder>() {
 
     private lateinit var mItemClickListener : FishItemClickListener
 
@@ -24,18 +24,18 @@ class HomeListAdapter (private val context: FragmentActivity, private val fishLi
 // bind data into UI
     override fun onBindViewHolder(holder: HomeListViewHolder, position: Int) {
         try {
-            val images = fishList[position].speciesIllustrationPhoto
-            val title = fishList[position].speciesName
-            val fishName = fishList[position].path.replace("/profiles/", "")
+            val images = fishList.products[position].images
+            val title = fishList.products[position].title
+            val fishName = fishList.products[position].brand
             GlideApp.with(context)
-                .load(images.src)
+                .load(images[0])
                 .into(holder.fishImage)
 
 
             holder.fishTitle.text = title
 
             holder.fishImage.setOnClickListener{
-                mItemClickListener.fishItemClicked(fishName, images.src)
+                mItemClickListener.fishItemClicked(fishName, images[0])
             }
 
         }catch (e: Exception){
@@ -48,7 +48,7 @@ class HomeListAdapter (private val context: FragmentActivity, private val fishLi
     }
 
     override fun getItemCount(): Int {
-        return fishList.size
+        return fishList.products.size
     }
 //prepare view holder to bind data into UI
     class HomeListViewHolder(view: View) : RecyclerView.ViewHolder(view) {

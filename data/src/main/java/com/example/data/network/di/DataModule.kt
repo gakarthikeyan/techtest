@@ -51,8 +51,6 @@ object DataModule {
         val request = original.newBuilder().method(original.method, original.body)
             .build()
         return@Interceptor chain.proceed(request)
-    })
-        .addInterceptor(loggingInterceptor())
-        .build()
+    }).addInterceptor(loggingInterceptor()).build()
 
 }

@@ -25,8 +25,8 @@ import dagger.hilt.android.AndroidEntryPoint
 class HomeFragment : Fragment(), HomeListAdapter.FishItemClickListener {
     private lateinit var navController: NavController
     private var mView: View? = null
-    lateinit var homeBinding: HomeFragmentLayoutBinding
-    lateinit var homeAdapter: HomeListAdapter
+    private lateinit var homeBinding: HomeFragmentLayoutBinding
+    private lateinit var homeAdapter: HomeListAdapter
     private lateinit var linearLayoutManager: LinearLayoutManager
     lateinit var viewModel: HomeViewModel
 

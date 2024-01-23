@@ -1,9 +1,10 @@
 package com.example.data.network.model.products
 
 
+import com.example.common.model.DataModel
 import com.google.gson.annotations.SerializedName
 
-data class ProductDTO(
+data class ProductEntity(
     @SerializedName("brand")
     val brand: String,
     @SerializedName("category")
@@ -26,4 +27,4 @@ data class ProductDTO(
     val thumbnail: String,
     @SerializedName("title")
     val title: String
-)
+): DataModel

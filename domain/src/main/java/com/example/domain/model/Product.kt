@@ -1,4 +1,6 @@
-package com.example.data.network.model.products
+package com.example.domain.model
+
+import com.example.common.model.DomainModel
 
 data class Product(
     val brand: String,
@@ -12,4 +14,4 @@ data class Product(
     val stock: Int,
     val thumbnail: String,
     val title: String
-)
+): DomainModel

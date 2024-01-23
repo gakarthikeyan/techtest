@@ -35,15 +35,14 @@ android {
 dependencies {
 
     implementation project(":common")
-    implementation project(":data")
 
 //    Dagger Hilt Dependency Injection
-    implementation "com.google.dagger:hilt-android:$hilt_version"
-    kapt "com.google.dagger:hilt-android-compiler:$hilt_version"
+    implementation libs.dagger.hilt.android
+    kapt libs.hilt.android.compiler
 
 //    Retrofit2
-    implementation "com.squareup.retrofit2:retrofit:$retrofit2_version"
-    implementation "com.squareup.retrofit2:converter-gson:$retrofit2_version"
-    implementation "com.squareup.okhttp3:logging-interceptor:$okhttp3_interceptor_version"
+    implementation libs.retrofit
+    implementation libs.converter.gson
+    implementation libs.logging.interceptor
 
 }

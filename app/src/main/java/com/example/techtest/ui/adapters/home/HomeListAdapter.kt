@@ -7,7 +7,7 @@ import android.widget.ImageView
 import android.widget.TextView
 import androidx.fragment.app.FragmentActivity
 import androidx.recyclerview.widget.RecyclerView
-import com.example.data.network.model.products.Products
+import com.example.domain.model.Products
 import com.example.techtest.BuildConfig
 import com.example.techtest.R
 import com.example.techtest.utility.GlideApp

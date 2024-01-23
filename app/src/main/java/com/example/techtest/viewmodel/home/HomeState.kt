@@ -1,6 +1,6 @@
 package com.example.techtest.viewmodel.home
 
-import com.example.data.network.model.products.Products
+import com.example.domain.model.Products
 
 data class HomeState(
     var isLoading: Boolean = false,

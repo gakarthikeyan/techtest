@@ -1,8 +1,10 @@
-package com.example.data.network.model.products
+package com.example.domain.model
+
+import com.example.common.model.DomainModel
 
 data class Products(
     val limit: Int,
     val products: List<Product>,
     val skip: Int,
     val total: Int
-)
+): DomainModel

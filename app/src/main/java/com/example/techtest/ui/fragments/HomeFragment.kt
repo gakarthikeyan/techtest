@@ -13,7 +13,7 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.NavController
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.example.data.network.model.products.Products
+import com.example.domain.model.Products
 import com.example.techtest.R
 import com.example.techtest.databinding.HomeFragmentLayoutBinding
 import com.example.techtest.ui.adapters.home.HomeListAdapter
@@ -72,7 +72,7 @@ class HomeFragment : Fragment(), HomeListAdapter.FishItemClickListener {
 
     //    check network connectivity to request api call
         if(Constants.isNetworkAvailable(requireContext())){
-            viewModel.fishItem.observe(viewLifecycleOwner){ state ->
+            viewModel.products.observe(viewLifecycleOwner){ state ->
                 if(state?.isLoading == true){
                     Constants.showProgressDialog(activity)
                 }

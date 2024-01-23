@@ -15,7 +15,7 @@ import javax.inject.Singleton
 
 @InstallIn(SingletonComponent::class)
 @Module
-object DataModule {
+object NetworkModule {
 
     //    config di for Retrofit instance
     @Singleton

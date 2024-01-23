@@ -7,14 +7,14 @@ plugins {
 }
 
 android {
-    compileSdk 34
+    compileSdk libs.versions.compileSDK.get().toInteger()
 
     defaultConfig {
         applicationId "com.example.techtest"
-        minSdk 23
-        targetSdk 34
-        versionCode 1
-        versionName "1.0"
+        minSdk libs.versions.minSDK.get().toInteger()
+        targetSdk libs.versions.compileSDK.get().toInteger()
+        versionCode libs.versions.versionCode.get().toInteger()
+        versionName libs.versions.versionName.get().toString()
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
@@ -82,42 +82,41 @@ dependencies {
     implementation project(':data')
     implementation project(':common')
 
-    implementation "androidx.core:core-ktx:$core_ktx_version"
-    implementation "androidx.appcompat:appcompat:$appcompat_version"
-    implementation "com.google.android.material:material:$material_version"
-    implementation "androidx.constraintlayout:constraintlayout:$constraintlayout_version"
-    testImplementation "junit:junit:$junit_version"
-    androidTestImplementation "androidx.test.ext:junit:$junit_ext_version"
-    androidTestImplementation "androidx.test.espresso:espresso-core:$espresso_core_version"
+    implementation libs.core.ktx
+    implementation libs.appcompat
+    implementation libs.material
+    implementation libs.constraintlayout
+    testImplementation libs.junit.version
+    androidTestImplementation libs.junit.ext
+    androidTestImplementation libs.espresso.core
 
     // Navigation Support
-    implementation "androidx.navigation:navigation-fragment-ktx:$nav_version"
-    implementation "androidx.navigation:navigation-ui-ktx:$nav_version"
+    implementation libs.navigation.fragment
+    implementation libs.navigation.ui
 
     //    Kotlin Coroutine
-    implementation "org.jetbrains.kotlinx:kotlinx-coroutines-core:$coroutine_version"
-    implementation "org.jetbrains.kotlinx:kotlinx-coroutines-android:$coroutine_version"
+    implementation libs.coroutines.core
+    implementation libs.coroutines.android
 
 //    Dagger Hilt Dependency Injection
-    implementation "com.google.dagger:hilt-android:$hilt_version"
-    kapt "com.google.dagger:hilt-android-compiler:$hilt_version"
+    implementation libs.dagger.hilt.android
+    kapt libs.hilt.android.compiler
 
 //    Retrofit2
-    implementation "com.squareup.retrofit2:retrofit:$retrofit2_version"
-    implementation "com.squareup.retrofit2:converter-gson:$retrofit2_version"
-    implementation "com.squareup.okhttp3:logging-interceptor:$okhttp3_interceptor_version"
+    implementation libs.retrofit
+    implementation libs.converter.gson
+    implementation libs.logging.interceptor
 
-//    Lifecycle
     // ViewModel
-    implementation("androidx.lifecycle:lifecycle-viewmodel-ktx:$lifecycle_version")
+    implementation libs.viewmodel.ktx
     // LiveData
-    implementation("androidx.lifecycle:lifecycle-livedata-ktx:$lifecycle_version")
+    implementation libs.livedata.ktx
     // Saved state module for ViewModel
-    implementation("androidx.lifecycle:lifecycle-viewmodel-savedstate:$lifecycle_version")
+    implementation libs.viewmodel.savedstate
 
-    kapt "androidx.lifecycle:lifecycle-common-java8:$lifecycle_version"
+    kapt libs.common.java8
 
 //    Glide Image library
-    implementation "com.github.bumptech.glide:glide:$glide_version"
-    kapt "com.github.bumptech.glide:compiler:$glide_version"
+    implementation libs.glide.version
+    kapt libs.glide.compiler
 }

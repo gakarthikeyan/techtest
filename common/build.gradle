@@ -35,7 +35,7 @@ android {
 dependencies {
 
 //    Dagger Hilt Dependency Injection
-    implementation "com.google.dagger:hilt-android:$hilt_version"
-    kapt "com.google.dagger:hilt-android-compiler:$hilt_version"
+    implementation libs.dagger.hilt.android
+    kapt libs.hilt.android.compiler
 
 }

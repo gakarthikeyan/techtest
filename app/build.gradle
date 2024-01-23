@@ -10,7 +10,7 @@ android {
     compileSdk libs.versions.compileSDK.get().toInteger()
 
     defaultConfig {
-        applicationId "com.example.techtest"
+        applicationId libs.versions.applicationId.get().toString()
         minSdk libs.versions.minSDK.get().toInteger()
         targetSdk libs.versions.compileSDK.get().toInteger()
         versionCode libs.versions.versionCode.get().toInteger()

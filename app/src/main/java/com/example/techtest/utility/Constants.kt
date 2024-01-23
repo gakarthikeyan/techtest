@@ -4,7 +4,6 @@ import android.app.Dialog
 import android.content.Context
 import android.net.ConnectivityManager
 import android.net.NetworkCapabilities
-import android.os.Build
 import com.example.techtest.BuildConfig
 import com.example.techtest.R
 
@@ -25,7 +24,7 @@ object Constants {
                 dialog?.setCancelable(false)
                 dialog?.show()
             } else {
-                if (!dialog?.isShowing!!) {
+                if (dialog?.isShowing == false) {
                     dialog = activity?.let { Dialog(it) }
                     dialog?.setContentView(R.layout.layout_progress_dialog)
                     dialog?.window?.setBackgroundDrawableResource(
@@ -44,7 +43,7 @@ object Constants {
     //cancel progress
     fun cancelProgressDialog() {
         try {
-            if (dialog != null && dialog?.isShowing!!) {
+            if (dialog != null && dialog?.isShowing == true) {
                 dialog?.dismiss()
                 dialog = null
             }
@@ -57,30 +56,12 @@ object Constants {
     }
 
 //    check internet availability
-    fun isNetworkAvailable(context: Context?): Boolean {
-        if (context == null) return false
-        val connectivityManager = context.getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q) {
-            val capabilities = connectivityManager.getNetworkCapabilities(connectivityManager.activeNetwork)
-            if (capabilities != null) {
-                when {
-                    capabilities.hasTransport(NetworkCapabilities.TRANSPORT_CELLULAR) -> {
-                        return true
-                    }
-                    capabilities.hasTransport(NetworkCapabilities.TRANSPORT_WIFI) -> {
-                        return true
-                    }
-                    capabilities.hasTransport(NetworkCapabilities.TRANSPORT_ETHERNET) -> {
-                        return true
-                    }
-                }
-            }
-        } else {
-            val activeNetworkInfo = connectivityManager.activeNetworkInfo
-            if (activeNetworkInfo != null && activeNetworkInfo.isConnected) {
-                return true
-            }
-        }
-        return false
+fun isNetworkAvailable(context: Context) =
+    (context.getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager).run {
+        getNetworkCapabilities(activeNetwork)?.run {
+            hasTransport(NetworkCapabilities.TRANSPORT_CELLULAR)
+                    || hasTransport(NetworkCapabilities.TRANSPORT_WIFI)
+                    || hasTransport(NetworkCapabilities.TRANSPORT_ETHERNET)
+        } ?: false
     }
 }
